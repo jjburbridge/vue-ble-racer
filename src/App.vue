@@ -5,8 +5,10 @@
       <router-link to="/about">About</router-link>
       <button @click="onClick" >Get Bluetooth</button>
       <button @click="moveRed" >move red</button>
+      <button v-if="red.position == 50" @click="boostRed">Speed bonus</button>
+      <button @click="slowRed">Speed bump</button>
       <div class="track">
-        <div class="red" :style="{'margin-left': red+ '%'}"></div>
+        <div class="red" :style="{'margin-left': red.position+ '%'}"></div>
       </div>
       <div v-if="winner">You Won</div>
     </div>
@@ -19,15 +21,30 @@
 export default {
   data() {
     return {
-      red: 0,
+      red: {
+        position: 0,
+        resistance: 10,
+      },
       winner: false,
     };
   },
   methods: {
     moveRed() {
-      if (this.red < 100) {
-        this.red += 10;
+      if (this.red.position < 100) {
+        this.red.position += this.red.resistance;
       }
+    },
+    boostRed() {
+      this.red.resistance = 20;
+      setTimeout(() => {
+        this.red.resistance = 10;
+      }, 5000);
+    },
+    slowRed() {
+      this.red.resistance = 5;
+      setTimeout(() => {
+        this.red.resistance = 10;
+      }, 5000);
     },
     onClick() {
       navigator.bluetooth.requestDevice({
@@ -83,8 +100,8 @@ export default {
     },
   },
   watch: {
-    red(a) {
-      if (a === 100) {
+    'red.position': function (a) {
+      if (a >= 100) {
         this.winner = true;
       }
     },
