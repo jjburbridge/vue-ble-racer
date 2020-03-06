@@ -7,7 +7,7 @@
 </template>
 
 <script>
-// @ is an alias to /src
+/* eslint no-bitwise: ["error", { "allow": ["&"] }] */
 import Course from '@/components/Course.vue';
 
 export default {
@@ -16,29 +16,6 @@ export default {
     Course,
   },
   methods: {
-    onClick() {
-      navigator.bluetooth.requestDevice({
-        filters: [
-          {
-            services: [
-              'heart_rate',
-            ],
-          },
-        ],
-      })
-        .then((device) => { console.log(device); return device.gatt.connect(); })
-        .then((server) => { console.log(server); return server.getPrimaryService('heart_rate'); })
-        .then((service) => {
-          console.log(service);
-          return service.getCharacteristic('heart_rate_measurement');
-        })
-        .then((characteristic) => {
-          console.log(characteristic);
-          return characteristic.readValue();
-        })
-        .then((value) => { console.log(value); })
-        .catch((error) => console.log(error));
-    },
   },
 };
 </script>

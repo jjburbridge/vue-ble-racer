@@ -41,8 +41,8 @@ export default {
 div.track {
   width: 100%;
 }
-.red{
-  background-color:red;
+.cyclist{
+  transform: scaleX(-1);
   width: 1%;
   height: 10px;
 }

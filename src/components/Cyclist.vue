@@ -1,9 +1,9 @@
 <template>
   <div>
-    <button @click="moveRed" >move red</button>
+    <button @click="start" >start</button>
     <button v-if="position == 50" @click="boostRed">Speed bonus</button>
     <button @click="slowRed">Speed bump</button>
-    <div class="red" :style="{'margin-left': position+ '%'}"></div>
+    <div class="cyclist" :style="{'margin-left': position+ '%'}">🚴🏼‍♂️</div>
     <div v-if="winner">You Finished</div>
   </div>
 </template>
@@ -18,9 +18,9 @@ export default {
     };
   },
   methods: {
-    moveRed() {
+    moveRed(power) {
       if (this.position < 100) {
-        this.position += this.resistance;
+        this.position += power * this.resistance;
       }
     },
     boostRed() {
@@ -34,6 +34,40 @@ export default {
       setTimeout(() => {
         this.resistance = 10;
       }, 5000);
+    },
+    start() {
+      navigator.bluetooth.requestDevice({
+        filters: [
+          {
+            services: [
+              'heart_rate',
+            ],
+          },
+        ],
+      })
+        .then((device) => { console.log(['device', device]); return device.gatt.connect(); })
+        .then((server) => { console.log(['server', server]); return server.getPrimaryService('heart_rate'); })
+        .then((service) => {
+          console.log(['service', service]);
+          return service.getCharacteristic('heart_rate_measurement');
+        })
+        .then((characteristic) => characteristic.startNotifications())
+        .then((characteristic) => {
+          console.log(['characteristic', characteristic]);
+          characteristic.addEventListener('characteristicvaluechanged', this.handleCharacteristicValueChanged.bind(this));
+        })
+        // .then((value) => { console.log(value); })
+        .catch((error) => console.log(error));
+    },
+    handleCharacteristicValueChanged(event) {
+      const { value } = event.target;
+      let index = 1;
+      const result = {};
+      result.heartRate = (value.getUint8(index) / 1000);
+      index += 1;
+
+      console.log([result]);
+      return this.moveRed(result.heartRate);
     },
   },
   watch: {
