@@ -11,26 +11,27 @@
 <script>
 
 export default {
-  props: ['position', 'resistance'],
   data() {
     return {
+      position: 0,
+      resistance: 10,
       winner: false,
     };
   },
   methods: {
     moveRed(power) {
       if (this.position < 100) {
-        this.position += power * this.resistance;
+        this.position += (power / this.resistance);
       }
     },
     boostRed() {
-      this.resistance = 20;
+      this.resistance = 5;
       setTimeout(() => {
         this.resistance = 10;
       }, 5000);
     },
     slowRed() {
-      this.resistance = 5;
+      this.resistance = 20;
       setTimeout(() => {
         this.resistance = 10;
       }, 5000);
@@ -63,10 +64,11 @@ export default {
       const { value } = event.target;
       let index = 1;
       const result = {};
+      console.log(value.getUint8(index));
       result.heartRate = (value.getUint8(index) / 1000);
       index += 1;
 
-      console.log([result]);
+      console.log([result.heartRate]);
       return this.moveRed(result.heartRate);
     },
   },

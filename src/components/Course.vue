@@ -4,8 +4,6 @@
       <div class="track">
         <Cyclist v-for="bike in cyclist"
           :key="bike.id"
-          :position="bike.position"
-          :resistance="bike.resistance"
         />
       </div>
     </div>
@@ -27,7 +25,7 @@ export default {
   methods: {
     addCyclist() {
       this.count += 1;
-      this.cyclist.push({ id: this.count, position: 0, resistance: 10 });
+      this.cyclist.push({ id: this.count });
     },
   },
 };

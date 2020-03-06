@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <button @click="onClick" >Get Bluetooth</button>
     <Course />
   </div>
 </template>
