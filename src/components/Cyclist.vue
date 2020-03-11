@@ -6,7 +6,9 @@
     </div>
     <div>
       <button @click="start" >Connect</button>
-      <div class="cyclist" :style="{'margin-left': position+ '%'}">🚴🏼‍♂️</div>
+      <div class="cyclist" :style="{'margin-left': position+ '%'}">
+        <div id="bm"></div>
+      </div>
       <div v-if="finished">You Finished</div>
       <la-cartesian :data="powerData">
         <la-line curve animated prop="value"></la-line>
@@ -17,6 +19,7 @@
 
 <script>
 import { Cartesian, Line } from 'laue';
+import bodymovin from 'bodymovin';
 
 export default {
   components: {
@@ -26,11 +29,24 @@ export default {
   props: {
     record: Boolean,
   },
+  mounted() {
+    this.$nextTick(() => {
+      const bmContainer = document.querySelector('#bm');
+      const animation = bodymovin.loadAnimation({
+        container: bmContainer,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/49240/bike.json',
+      });
+      animation.setSpeed(0);
+      this.animation = animation;
+    });
+  },
   data() {
     return {
-      powerData: [
-        { value: 0 },
-      ],
+      powerData: [{ value: 0 }],
+      animation: null,
       position: 0,
       resistance: 10,
       finished: false,
@@ -55,9 +71,9 @@ export default {
       const { value } = event.target;
       const index = 1;
       const power = value.getInt16(index);
-      console.log(power);
       this.current_power = power;
       if (this.record) {
+        this.animation.setSpeed(power / 100);
         this.total_power += power;
         this.powerData.push({ value: power });
       }
@@ -71,6 +87,7 @@ export default {
       }
 
       if (totalPower >= this.target_power) {
+        this.animation.setSpeed(0);
         this.finished = true;
       }
     },
