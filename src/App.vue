@@ -1,9 +1,5 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <router-view/>
   </div>
 </template>
@@ -16,34 +12,16 @@ export default {
   },
 };
 </script>
-
 <style>
+  @import url('https://fonts.googleapis.com/css?family=Lobster|Monoton|Montserrat|Roboto&display=swap');
+</style>
+<style>
+
+body { background-color: #111111; }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-div.track {
-  width: 100%;
-}
-.cyclist{
-  transform: scaleX(-1);
-  width: 1%;
-  height: 10px;
-}
 </style>

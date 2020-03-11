@@ -1,6 +1,6 @@
 <template>
-    <div>
-      <button @click="addCyclist" >Add Cyclist</button>
+    <div class="wrapper">
+      <button @click="addCyclist" class="button add-cyclist">Add Cyclist</button>
       <div class="track">
         <Cyclist v-for="bike in cyclist"
           :key="bike.id"

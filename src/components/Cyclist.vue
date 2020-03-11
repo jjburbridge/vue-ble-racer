@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="menu">
     <button @click="start" >start</button>
     <button v-if="position == 50" @click="boostRed">Speed bonus</button>
     <button @click="slowRed">Speed bump</button>
