@@ -41,16 +41,16 @@ export default {
         filters: [
           {
             services: [
-              'heart_rate',
+              'cycling_power',
             ],
           },
         ],
       })
         .then((device) => { console.log(['device', device]); return device.gatt.connect(); })
-        .then((server) => { console.log(['server', server]); return server.getPrimaryService('heart_rate'); })
+        .then((server) => { console.log(['server', server]); return server.getPrimaryService('cycling_power'); })
         .then((service) => {
           console.log(['service', service]);
-          return service.getCharacteristic('heart_rate_measurement');
+          return service.getCharacteristic('cycling_power_measurement');
         })
         .then((characteristic) => characteristic.startNotifications())
         .then((characteristic) => {
@@ -64,8 +64,8 @@ export default {
       const { value } = event.target;
       let index = 1;
       const result = {};
-      console.log(value.getUint8(index));
-      result.heartRate = (value.getUint8(index) / 1000);
+      console.log(value.getInt16(index));
+      result.heartRate = (value.getInt16(index) / 1000);
       index += 1;
 
       console.log([result.heartRate]);
