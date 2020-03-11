@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <la-cartesian :data="powerData" class="power-graph" :width="'2000'">
+    <la-cartesian :data="powerData" class="power-graph" :width="1680">
       <la-line curve animated prop="value"></la-line>
     </la-cartesian>
   </div>
@@ -39,6 +39,7 @@
 <script>
 import { Cartesian, Line } from 'laue';
 import bodymovin from 'bodymovin';
+import moment from 'moment';
 
 export default {
   components: {
@@ -50,6 +51,14 @@ export default {
     id: Number,
     record: Boolean,
     name: String,
+    startTime: Object,
+  },
+  updated() {
+    if (this.finished) {
+      const now = moment();
+      const seconds = now.diff(this.startTime) / 1000;
+      window.alert(`${this.name} has finished in ${seconds} seconds`);
+    }
   },
   mounted() {
     this.$nextTick(() => {
@@ -67,8 +76,7 @@ export default {
   },
   data() {
     return {
-      powerData: [{ value: 0 }, { value: 130 }, { value: 150 }, { value: 125 },
-        { value: 100 }, { value: 100 }],
+      powerData: [{ value: 0 }],
       animation: null,
       position: 0,
       resistance: 10,
@@ -95,7 +103,7 @@ export default {
       const index = 1;
       const power = value.getInt16(index);
       this.current_power = power;
-      if (this.record) {
+      if (this.record && !this.finished) {
         this.animation.setSpeed(power / 100);
         this.total_power += power;
         this.powerData.push({ value: power });

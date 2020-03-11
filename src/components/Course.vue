@@ -9,6 +9,7 @@
           :key="bike.id"
           :class="[`rider--${bike.id}`]"
           :record="record"
+          :startTime="startTime"
           :id="bike.id"
           :name="bike.name"
         />
@@ -18,6 +19,7 @@
 
 <script>
 import Cyclist from '@/components/Cyclist.vue';
+import moment from 'moment';
 
 export default {
   components: {
@@ -28,6 +30,7 @@ export default {
       cyclist: [],
       count: 0,
       record: false,
+      startTime: null,
     };
   },
   methods: {
@@ -38,6 +41,8 @@ export default {
     },
     start() {
       this.record = true;
+      this.startTime = moment();
+      console.log(this.startTime);
     },
   },
 };
