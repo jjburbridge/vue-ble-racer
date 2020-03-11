@@ -28,7 +28,7 @@ text-align: center;
 
 .tag{
   font-size: 10px;
-  
+
   display: inline-block;
   line-height: 1;
   vertical-align: baseline;
@@ -127,7 +127,7 @@ text-align: center;
   display: flex;
   align-items: center;
   outline:none;
-  
+
   img{
     max-width: 20px;
   }
@@ -157,7 +157,7 @@ text-align: center;
   .rider--2{
     path{
       stroke:rgba(green, 1);
-    } 
+    }
 
     .road{
       bottom:150px;
@@ -167,15 +167,15 @@ text-align: center;
   .rider--3{
     path{
       stroke:rgba(blue, 1);
-    }  
+    }
   }
-    
+
   .rider--4{
     path{
       stroke:rgba(rebeccapurple, 1.2);
     }
   }
-  
+
 }
 
 
@@ -223,8 +223,8 @@ i{
 .white i:nth-of-type(2) {
   animation: upper 5s linear infinite;
 }
-.red i:nth-of-type(2) {
-  animation: lower 10s linear infinite;
+.red i {
+  animation: lower 5s linear infinite;
   font-style: italic !important;
 }
 .red i:nth-of-type(1) {
@@ -289,7 +289,7 @@ i{
 .power-wrapper{
   color:red;
   font-size: 30px;
-  
+
   text-shadow: 0 0 80px red,0 0 30px FireBrick,0 0 6px DarkRed;
   font-family: 'Monoton', cursive;
   display: flex;
@@ -326,8 +326,8 @@ i{
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  
+
+
 
   &:after{
     content:'';
