@@ -5,6 +5,7 @@
        {{ current_power }}
     </div>
     <div class="racing-lane">
+      <h1 class="white">Player {{id}}: {{name}}</h1>
       <h4>Total power: {{ total_power }}</h4>
     </div>
     <div>
@@ -31,11 +32,13 @@ export default {
   },
   props: {
     count: Number,
+    id: Number,
     record: Boolean,
+    name: String,
   },
   mounted() {
     this.$nextTick(() => {
-      const bmContainer = document.querySelector('#bm');
+      const bmContainer = document.querySelector(`.biker--${this.id} #bm`);
       const animation = bodymovin.loadAnimation({
         container: bmContainer,
         renderer: 'svg',

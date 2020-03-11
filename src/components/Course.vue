@@ -6,6 +6,8 @@
           :key="bike.id"
           :class="[`biker--${bike.id}`]"
           :record="record"
+          :id="bike.id"
+          :name="bike.name"
         />
       </div>
     </div>
@@ -30,7 +32,8 @@ export default {
   methods: {
     addCyclist() {
       this.count += 1;
-      this.cyclist.push({ id: this.count });
+      const name = window.prompt('Please enter your name', '');
+      this.cyclist.push({ id: this.count, name });
     },
   },
 };
