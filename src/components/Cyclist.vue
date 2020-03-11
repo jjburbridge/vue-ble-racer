@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <div class="power">
-      <h3>{{ current_power }}</h3>
+  <div :class="[count, 'fuckthis']">
+    <div class="power" :class="resistance">
+       {{ current_power }}
     </div>
-    <div>
+    <div class="racing-lane">
       <button @click="start" >start</button>
       <div class="cyclist" :style="{'margin-left': position+ '%'}">🚴🏼‍♂️</div>
       <div v-if="winner">You Finished</div>
@@ -21,6 +21,9 @@ export default {
   components: {
     LaCartesian: Cartesian,
     LaLine: Line,
+  },
+  props: {
+    count: Number,
   },
   data() {
     return {

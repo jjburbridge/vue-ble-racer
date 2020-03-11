@@ -4,6 +4,7 @@
       <div class="track">
         <Cyclist v-for="bike in cyclist"
           :key="bike.id"
+          :class="[`biker--${bike.id}`]"
         />
       </div>
     </div>
