@@ -6,7 +6,7 @@
     <div>
       <button @click="start" >start</button>
       <div class="cyclist" :style="{'margin-left': position+ '%'}">🚴🏼‍♂️</div>
-      <div v-if="winner">You Finished</div>
+      <div v-if="finished">You Finished</div>
       <la-cartesian :data="powerData">
         <la-line curve animated prop="value"></la-line>
       </la-cartesian>
