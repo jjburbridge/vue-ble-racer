@@ -62,14 +62,10 @@ export default {
     },
     handleCharacteristicValueChanged(event) {
       const { value } = event.target;
-      let index = 1;
-      const result = {};
-      console.log(value.getInt16(index));
-      result.heartRate = (value.getInt16(index) / 1000);
-      index += 1;
-
-      console.log([result.heartRate]);
-      return this.moveRed(result.heartRate);
+      const index = 1;
+      const power = value.getInt16(index);
+      console.log(power);
+      return this.moveRed(power);
     },
   },
   watch: {
