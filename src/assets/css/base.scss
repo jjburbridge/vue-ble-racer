@@ -36,37 +36,35 @@ text-align: center;
 }
 .add-cyclist{
 
-font-family: 'Montserrat', sans-serif;
-// font-family: 'Lobster', cursive;
-font-size: 30px;
-font-weight: 200;
-
-
+  font-family: 'Montserrat', sans-serif;
+  // font-family: 'Lobster', cursive;
+  font-size: 30px;
+  font-weight: 200;
 }
 
 
 
 .track{
 
-  .rider--01{
+  .rider--1{
     path{
       stroke:rgba(red, 1);
     } 
   }
 
-  .rider--02{
+  .rider--2{
     path{
       stroke:rgba(green, 1);
     } 
   }
 
-  .rider--03{
+  .rider--3{
     path{
       stroke:rgba(blue, 1);
     }  
   }
     
-  .rider--04{
+  .rider--4{
     path{
       stroke:rgba(rebeccapurple, 1.2);
     } 

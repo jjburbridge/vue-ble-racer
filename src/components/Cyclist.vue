@@ -1,10 +1,7 @@
 <template>
 <div :class="[count, 'fuckthis']">
     <div class="power white" :class="resistance">
-      <img svg-inline class="power-icon" src="../assets/lightning.svg" alt="example" />
        {{ current_power }}
-    </div>
-    <div class="racing-lane">
       <h4>Total power: {{ total_power }}</h4>
     </div>
     <div>
@@ -49,7 +46,8 @@ export default {
   },
   data() {
     return {
-      powerData: [{ value: 0 }],
+      powerData: [{ value: 0 }, { value: 130 }, { value: 150 }, { value: 125 },
+        { value: 100 }, { value: 100 }],
       animation: null,
       position: 0,
       resistance: 10,
