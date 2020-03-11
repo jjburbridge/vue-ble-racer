@@ -5,14 +5,29 @@
     <button @click="slowRed">Speed bump</button>
     <div class="cyclist" :style="{'margin-left': position+ '%'}">🚴🏼‍♂️</div>
     <div v-if="winner">You Finished</div>
+    <la-cartesian :data="powerData">
+      <la-line curve prop="value"></la-line>
+    </la-cartesian>
   </div>
 </template>
 
 <script>
+import { Cartesian, Line } from 'laue';
 
 export default {
+  components: {
+    LaCartesian: Cartesian,
+    LaLine: Line,
+  },
   data() {
     return {
+      powerData: [
+        { value: 10 },
+        { value: 20 },
+        { value: 30 },
+        { value: 20 },
+        { value: 100 },
+      ],
       position: 0,
       resistance: 10,
       winner: false,
@@ -64,7 +79,7 @@ export default {
       const { value } = event.target;
       const index = 1;
       const power = value.getInt16(index);
-      console.log(power);
+      this.powerData.push({ value: power });
       return this.moveRed(power);
     },
   },
