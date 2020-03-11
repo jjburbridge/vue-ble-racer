@@ -1,10 +1,13 @@
 <template>
   <div>
-    <button @click="start" >start</button>
-    <button v-if="position == 50" @click="boostRed">Speed bonus</button>
-    <button @click="slowRed">Speed bump</button>
-    <div class="cyclist" :style="{'margin-left': position+ '%'}">🚴🏼‍♂️</div>
-    <div v-if="winner">You Finished</div>
+    <div class="power">
+      <h3>{{ current_power }}</h3>
+    </div>
+    <div>
+      <button @click="start" >start</button>
+      <div class="cyclist" :style="{'margin-left': position+ '%'}">🚴🏼‍♂️</div>
+      <div v-if="winner">You Finished</div>
+    </div>
   </div>
 </template>
 
@@ -15,7 +18,8 @@ export default {
     return {
       position: 0,
       resistance: 10,
-      winner: false,
+      finished: false,
+      current_power: 0,
     };
   },
   methods: {
@@ -23,18 +27,6 @@ export default {
       if (this.position < 100) {
         this.position += (power / this.resistance);
       }
-    },
-    boostRed() {
-      this.resistance = 5;
-      setTimeout(() => {
-        this.resistance = 10;
-      }, 5000);
-    },
-    slowRed() {
-      this.resistance = 20;
-      setTimeout(() => {
-        this.resistance = 10;
-      }, 5000);
     },
     start() {
       navigator.bluetooth.requestDevice({
@@ -65,13 +57,14 @@ export default {
       const index = 1;
       const power = value.getInt16(index);
       console.log(power);
+      this.current_power = power;
       return this.moveRed(power);
     },
   },
   watch: {
     position(a) {
       if (a >= 100) {
-        this.winner = true;
+        this.finished = true;
       }
     },
   },
