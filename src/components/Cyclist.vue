@@ -1,13 +1,14 @@
 <template>
 <div :class="[count]">
   <div class="rider-details">
-    <button @click="start" >Connect</button>
-
     <div class="player-stats">
-      <h1 class="white">Player {{id}}: {{name}}</h1>
+      <h1 class="player-name white">Player {{id}}: {{name}} <button @click="start" class="connect">
+        <img src="../assets/bluetooth.svg" alt="bluetooth"/>
+      </button></h1>
       <div class="power-wrapper">
         <h2>Power:</h2>
         <div class="total-power white">
+
           Total: {{ total_power }}
           <font-awesome-icon icon="bolt" />
         </div>
@@ -17,15 +18,16 @@
         </div>
       </div>
     </div>
-    <la-cartesian :data="powerData" class="power-graph" :width="'100%'">
+    <la-cartesian :data="powerData" class="power-graph" :width="'2000'">
       <la-line curve animated prop="value"></la-line>
     </la-cartesian>
   </div>
 
     <div>
     <div class="road">
-      <div v-if="finished">You Finished</div>
+      <div class="finished" v-if="finished">🏁 {{name}} Won! 🏁</div>
       <div class="cyclist" :style="{'margin-left': position+ '%'}">
+        <div class="tag">{{name}}</div>
         <div id="bm"></div>
       </div>
     </div>
@@ -104,7 +106,7 @@ export default {
     total_power(totalPower) {
       if (totalPower !== 0) {
         const percent = (totalPower / this.target_power) * 100;
-        this.position = (percent > 100) ? 100 : percent;
+        this.position = (percent > 92.7) ? 92.7 : percent;
       }
 
       if (totalPower >= this.target_power) {

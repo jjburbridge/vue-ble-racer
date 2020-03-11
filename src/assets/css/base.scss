@@ -22,13 +22,58 @@ text-align: center;
   width: 100px;
   height: 100px;
   font-size: 30px;
+  transition: margin-left 10ms;
+  position: relative;
+
+
+.tag{
+  font-size: 10px;
+  
+  display: inline-block;
+  line-height: 1;
+  vertical-align: baseline;
+  margin: 0 .14285714em;
+  background-color: #e8e8e8;
+  background-image: none;
+  padding: .5833em .833em;
+  color: rgba(0,0,0,.6);
+  text-transform: none;
+  font-weight: 700;
+  border: 0 solid transparent;
+  border-radius: .28571429rem;
+  -webkit-transition: background .1s ease;
+  transition: background .1s ease;
+  position: absolute;
+  left:50%;
+  transform: translateX(-50%);
+  top:-20px;
+
+
+&:before {
+  border-width: 1px 0 0 1px;
+  background-color: #e8e8e8;
+    -webkit-transform: translateX(-50%) rotate(45deg);
+    transform: translateX(-50%) rotate(45deg);
+    bottom:-3px;
+    left: 50%;
+    position: absolute;
+    content: '';
+    background-image: none;
+    z-index: 2;
+    width: .6666em;
+    height: .6666em;
+    -webkit-transition: background .1s ease;
+    transition: background .1s ease;
+  }
+}
+
 }
 
 
 .controls{
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  padding:20px 0 50px;
 }
 
 /* ====== buttons */
@@ -36,8 +81,8 @@ text-align: center;
   border:0;
   background: 0;
   color:white;
-
-  font-family: 'Montserrat', sans-serif;
+  outline: none;
+  font-family: 'Monoton', cursive;
   // font-family: 'Lobster', cursive;
   font-size: 30px;
   font-weight: 200;
@@ -54,6 +99,10 @@ text-align: center;
     text-shadow: 0 0 80px red,0 0 30px firebrick,0 0 6px darkred;
     box-shadow: 0 0 10px rgba(red, 0.3),0 0 3px rgba(firebrick, 0.3),0 0 2px rgba(darkred, 0.3);
   }
+
+  &:focus{
+    outline: none
+  }
 }
 .add-cyclist{
 
@@ -65,8 +114,23 @@ text-align: center;
 
 }
 
+.player-name{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .connect{
-  color:#0000ff;
+  background: none;
+  border:0;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  outline:none;
+  
+  img{
+    max-width: 20px;
+  }
 }
 
 
@@ -207,8 +271,18 @@ i{
 }
 
 /* ================= stats == */
+
+.rider-details{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 650px;
+}
+
 .player-stats{
-  width: 80%;
+  width: calc(100% - 20px);
+  margin:0 10px;
+  padding:10px;
   border: 2px solid white;
   box-shadow: 0 0 10px rgba(#ffffff, 0.3),0 0 3px rgba(#008000, 0.3),0 0 2px rgba(#0000ff, 0.3);
 }
@@ -233,7 +307,38 @@ i{
 }
 .total-power{
   width: 50%;
+  text-align: left;
 }
 .current-power{
   width: 50%;
+  text-align: left;
+}
+
+.finished{
+  position: fixed;
+  color:white;
+  font-size: 100px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  
+
+  &:after{
+    content:'';
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height:100vh;
+    background:rgba(0,0,0,0.4);
+    z-index: -1;
+  }
 }
