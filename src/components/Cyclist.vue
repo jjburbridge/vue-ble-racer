@@ -8,7 +8,7 @@
       <div class="cyclist" :style="{'margin-left': position+ '%'}">🚴🏼‍♂️</div>
       <div v-if="winner">You Finished</div>
       <la-cartesian :data="powerData">
-        <la-line curve prop="value"></la-line>
+        <la-line curve animated prop="value"></la-line>
       </la-cartesian>
     </div>
   </div>
@@ -25,11 +25,7 @@ export default {
   data() {
     return {
       powerData: [
-        { value: 10 },
-        { value: 20 },
-        { value: 30 },
-        { value: 20 },
-        { value: 100 },
+        { value: 0 },
       ],
       position: 0,
       resistance: 10,
@@ -44,27 +40,14 @@ export default {
       }
     },
     start() {
-      navigator.bluetooth.requestDevice({
-        filters: [
-          {
-            services: [
-              'cycling_power',
-            ],
-          },
-        ],
-      })
-        .then((device) => { console.log(['device', device]); return device.gatt.connect(); })
-        .then((server) => { console.log(['server', server]); return server.getPrimaryService('cycling_power'); })
-        .then((service) => {
-          console.log(['service', service]);
-          return service.getCharacteristic('cycling_power_measurement');
-        })
+      navigator.bluetooth.requestDevice({ filters: [{ services: ['cycling_power'] }] })
+        .then((device) => device.gatt.connect())
+        .then((server) => server.getPrimaryService('cycling_power'))
+        .then((service) => service.getCharacteristic('cycling_power_measurement'))
         .then((characteristic) => characteristic.startNotifications())
         .then((characteristic) => {
-          console.log(['characteristic', characteristic]);
           characteristic.addEventListener('characteristicvaluechanged', this.handleCharacteristicValueChanged.bind(this));
         })
-        // .then((value) => { console.log(value); })
         .catch((error) => console.log(error));
     },
     handleCharacteristicValueChanged(event) {
