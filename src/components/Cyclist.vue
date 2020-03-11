@@ -83,7 +83,7 @@ export default {
       finished: false,
       current_power: 0,
       total_power: 0,
-      target_power: 1000,
+      target_power: 5000,
     };
   },
   methods: {
