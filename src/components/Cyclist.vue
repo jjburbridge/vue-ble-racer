@@ -1,7 +1,8 @@
 <template>
   <div>
-    <div class="power">
+    <div class="power white">
       <h3>{{ current_power }}</h3>
+      <h4>Total power: {{ total_power }}</h4>
     </div>
     <div>
       <button @click="start" >start</button>
@@ -31,14 +32,11 @@ export default {
       resistance: 10,
       finished: false,
       current_power: 0,
+      total_power: 0,
+      target_power: 1000,
     };
   },
   methods: {
-    moveRed(power) {
-      if (this.position < 100) {
-        this.position += (power / this.resistance);
-      }
-    },
     start() {
       navigator.bluetooth.requestDevice({ filters: [{ services: ['cycling_power'] }] })
         .then((device) => device.gatt.connect())
@@ -56,13 +54,18 @@ export default {
       const power = value.getInt16(index);
       console.log(power);
       this.current_power = power;
+      this.total_power += power;
       this.powerData.push({ value: power });
-      return this.moveRed(power);
     },
   },
   watch: {
-    position(a) {
-      if (a >= 100) {
+    total_power(totalPower) {
+      if (totalPower !== 0) {
+        const percent = (totalPower / this.target_power) * 100;
+        this.position = (percent > 100) ? 100 : percent;
+      }
+
+      if (totalPower >= this.target_power) {
         this.finished = true;
       }
     },
