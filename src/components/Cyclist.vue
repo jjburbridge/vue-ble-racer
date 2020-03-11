@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="power">
+    <div class="power white">
       <h3>{{ current_power }}</h3>
     </div>
     <div>
-      <button @click="start" >start</button>
+      <button @click="start" >Connect</button>
       <div class="cyclist" :style="{'margin-left': position+ '%'}">🚴🏼‍♂️</div>
       <div v-if="winner">You Finished</div>
       <la-cartesian :data="powerData">
@@ -21,6 +21,9 @@ export default {
   components: {
     LaCartesian: Cartesian,
     LaLine: Line,
+  },
+  props: {
+    record: Boolean,
   },
   data() {
     return {
@@ -73,8 +76,10 @@ export default {
       const power = value.getInt16(index);
       console.log(power);
       this.current_power = power;
-      this.powerData.push({ value: power });
-      return this.moveRed(power);
+      if (this.record) {
+        this.powerData.push({ value: power });
+        this.moveRed(power);
+      }
     },
   },
   watch: {
