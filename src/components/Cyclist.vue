@@ -1,17 +1,27 @@
 <template>
 <div :class="[count]">
-  <button @click="start" >Connect</button>
-    <div class="current-power white" :class="resistance">
-         <font-awesome-icon icon="bolt" />
-        {{ current_power }}
-    </div>
-    <div class="player">
+  <div class="rider-details">
+    <button @click="start" >Connect</button>
+
+    <div class="player-stats">
       <h1 class="white">Player {{id}}: {{name}}</h1>
-      <h4>Total power: {{ total_power }}</h4>
+      <div class="power-wrapper">
+        <h2>Power:</h2>
+        <div class="total-power white">
+          Total: {{ total_power }}
+          <font-awesome-icon icon="bolt" />
+        </div>
+        <div class="current-power white" :class="resistance">
+          Current: {{ current_power }}
+          <font-awesome-icon icon="bolt" />
+        </div>
+      </div>
     </div>
-    <la-cartesian :data="powerData">
+    <la-cartesian :data="powerData" class="power-graph" :width="'100%'">
       <la-line curve animated prop="value"></la-line>
     </la-cartesian>
+  </div>
+
     <div>
     <div class="road">
       <div v-if="finished">You Finished</div>
