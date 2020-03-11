@@ -5,6 +5,7 @@
         <Cyclist v-for="bike in cyclist"
           :key="bike.id"
           :class="[`biker--${bike.id}`]"
+          :record="record"
         />
       </div>
     </div>
@@ -16,6 +17,9 @@ import Cyclist from '@/components/Cyclist.vue';
 export default {
   components: {
     Cyclist,
+  },
+  props: {
+    record: Boolean,
   },
   data() {
     return {

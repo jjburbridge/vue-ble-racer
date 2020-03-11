@@ -18,17 +18,17 @@ text-align: center;
 .track {
   width: 100%;
 }
-.cyclist{
-  transform: scaleX(-1);
-  width: 1%;
-  height: 10px;
+
+.cyclist {
+  width: 100px;
+  height: 100px;
   font-size: 30px;
 }
 
 
 
 /* ====== buttons */
-.button{ 
+.button {
   border:0;
   background: 0;
   color:white;
@@ -48,32 +48,28 @@ font-weight: 200;
 
 .track{
 
-  .rider01{
-    background:red ;
-    // path{
-    //   stroke:rgba(red, 1);
-    // } 
+  .rider--01{
+    path{
+      stroke:rgba(red, 1);
+    } 
   }
 
-  .rider02{
-    background:green ;
-    // path{
-    //   stroke:rgba(green, 1);
-    // } 
+  .rider--02{
+    path{
+      stroke:rgba(green, 1);
+    } 
   }
 
-  .rider03{
-    background:blue ;
-    // path{
-    //   stroke:rgba(blue, 1);
-    // }  
+  .rider--03{
+    path{
+      stroke:rgba(blue, 1);
+    }  
   }
     
-  .rider04{
-    background:rebeccapurple ;
-    // path{
-    //   stroke:rgba(rebeccapurple, 1.2);
-    // } 
+  .rider--04{
+    path{
+      stroke:rgba(rebeccapurple, 1.2);
+    } 
   }
   
 }
@@ -111,7 +107,6 @@ i{
 
 .white i:nth-of-type(2) {
   animation: upper 5s linear infinite;
-  
 }
 .red i:nth-of-type(2) {
   animation: lower 10s linear infinite;
@@ -162,84 +157,7 @@ i{
 // font-family: 'Montserrat', sans-serif;
 // font-family: 'Lobster', cursive;
 }
-@keyframes heartbeat-loader {
-  0% {
-    -moz-transform: rotate(45deg) scale(1);
-    -ms-transform: rotate(45deg) scale(1);
-    -webkit-transform: rotate(45deg) scale(1);
-    transform: rotate(45deg) scale(1);
-  }
-  14% {
-    -moz-transform: rotate(45deg) scale(1.3);
-    -ms-transform: rotate(45deg) scale(1.3);
-    -webkit-transform: rotate(45deg) scale(1.3);
-    transform: rotate(45deg) scale(1.3);
-  }
-  28% {
-    -moz-transform: rotate(45deg) scale(1);
-    -ms-transform: rotate(45deg) scale(1);
-    -webkit-transform: rotate(45deg) scale(1);
-    transform: rotate(45deg) scale(1);
-  }
-  42% {
-    -moz-transform: rotate(45deg) scale(1.3);
-    -ms-transform: rotate(45deg) scale(1.3);
-    -webkit-transform: rotate(45deg) scale(1.3);
-    transform: rotate(45deg) scale(1.3);
-  }
-  70% {
-    -moz-transform: rotate(45deg) scale(1);
-    -ms-transform: rotate(45deg) scale(1);
-    -webkit-transform: rotate(45deg) scale(1);
-    transform: rotate(45deg) scale(1);
-  }
-}
-/* :not(:required) hides this rule from IE9 and below */
-.heartbeat-loader:not(:required) {
-  margin-right:10px;
 
-  animation: heartbeat-loader 3s ease 0s infinite normal;
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-  text-indent: -9999px;
-  width: 36px;
-  height: 36px;
-  -moz-transform: rotate(45deg) scale(1);
-  -ms-transform: rotate(45deg) scale(1);
-  -webkit-transform: rotate(45deg) scale(1);
-  transform: rotate(45deg) scale(1);
-  -moz-transform-origin: 50% 50%;
-  -ms-transform-origin: 50% 50%;
-  -webkit-transform-origin: 50% 50%;
-  transform-origin: 50% 50%;
-}
-.heartbeat-loader:not(:required):after, .heartbeat-loader:not(:required):before {
-  position: absolute;
-  content: "";
-  background:rgba(red, 1);
-}
-.heartbeat-loader:not(:required):before {
-  -moz-border-radius-topleft: 12px;
-  -webkit-border-top-left-radius: 12px;
-  border-top-left-radius: 12px;
-  -moz-border-radius-bottomleft: 12px;
-  -webkit-border-bottom-left-radius: 12px;
-  border-bottom-left-radius: 12px;
-  top: 12px;
-  left: 0;
-  width: 36px;
-  height: 24px;
-}
-.heartbeat-loader:not(:required):after {
-  -moz-border-radius-topleft: 12px;
-  -webkit-border-top-left-radius: 12px;
-  border-top-left-radius: 12px;
-  -moz-border-radius-topright: 12px;
-  -webkit-border-top-right-radius: 12px;
-  border-top-right-radius: 12px;
-  top: 0;
-  left: 12px;
-  width: 24px;
-  height: 12px;
+.power-icon{
+  max-width: 40px;
 }
