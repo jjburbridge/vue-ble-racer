@@ -1,5 +1,6 @@
 <template>
 <div :class="[count]">
+  <button @click="start" >Connect</button>
     <div class="current-power white" :class="resistance">
          <font-awesome-icon icon="bolt" />
         {{ current_power }}
@@ -8,17 +9,17 @@
       <h1 class="white">Player {{id}}: {{name}}</h1>
       <h4>Total power: {{ total_power }}</h4>
     </div>
+    <la-cartesian :data="powerData">
+      <la-line curve animated prop="value"></la-line>
+    </la-cartesian>
     <div>
-      <button @click="start" ><font-awesome-icon icon="bluetooth" />Connect</button>
-      <div class="road">
-        <div class="cyclist" :style="{'margin-left': position+ '%'}">
-          <div id="bm"></div>
-        </div>
-      </div>
+    <div class="road">
       <div v-if="finished">You Finished</div>
-      <la-cartesian :data="powerData">
-        <la-line curve animated prop="value"></la-line>
-      </la-cartesian>
+      <div class="cyclist" :style="{'margin-left': position+ '%'}">
+        <div id="bm"></div>
+      </div>
+    </div>
+
     </div>
   </div>
 </template>
