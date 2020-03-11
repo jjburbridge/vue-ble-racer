@@ -1,13 +1,19 @@
 <template>
-<div :class="[count, 'fuckthis']">
-    <div class="power white" :class="resistance">
-       {{ current_power }}
+<div :class="[count]">
+    <div class="current-power white" :class="resistance">
+         <font-awesome-icon icon="bolt" />
+        {{ current_power }}
+    </div>
+    <div class="player">
+      <h1 class="white">Player {{id}}: {{name}}</h1>
       <h4>Total power: {{ total_power }}</h4>
     </div>
     <div>
-      <button @click="start" >Connect</button>
-      <div class="cyclist" :style="{'margin-left': position+ '%'}">
-        <div id="bm"></div>
+      <button @click="start" ><font-awesome-icon icon="bluetooth" />Connect</button>
+      <div class="road">
+        <div class="cyclist" :style="{'margin-left': position+ '%'}">
+          <div id="bm"></div>
+        </div>
       </div>
       <div v-if="finished">You Finished</div>
       <la-cartesian :data="powerData">
@@ -28,11 +34,13 @@ export default {
   },
   props: {
     count: Number,
+    id: Number,
     record: Boolean,
+    name: String,
   },
   mounted() {
     this.$nextTick(() => {
-      const bmContainer = document.querySelector('#bm');
+      const bmContainer = document.querySelector(`.rider--${this.id} #bm`);
       const animation = bodymovin.loadAnimation({
         container: bmContainer,
         renderer: 'svg',

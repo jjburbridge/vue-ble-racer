@@ -1,11 +1,16 @@
 <template>
     <div class="wrapper">
-      <button @click="addCyclist" class="button add-cyclist">Add Cyclist</button>
+      <div class="controls">
+        <button @click="addCyclist" class="button add-cyclist">Add Cyclist</button>
+        <button @click="start" class="button start-race">Start Race</button>
+      </div>
       <div class="track">
         <Cyclist v-for="bike in cyclist"
           :key="bike.id"
           :class="[`rider--${bike.id}`]"
           :record="record"
+          :id="bike.id"
+          :name="bike.name"
         />
       </div>
     </div>
@@ -18,19 +23,21 @@ export default {
   components: {
     Cyclist,
   },
-  props: {
-    record: Boolean,
-  },
   data() {
     return {
       cyclist: [],
       count: 0,
+      record: false,
     };
   },
   methods: {
     addCyclist() {
       this.count += 1;
-      this.cyclist.push({ id: this.count });
+      const name = window.prompt('Please enter your name', '');
+      this.cyclist.push({ id: this.count, name });
+    },
+    start() {
+      this.record = true;
     },
   },
 };

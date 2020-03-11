@@ -7,7 +7,10 @@
   flex-wrap: wrap;
 }
 
-
+.svg-inline--fa{
+  color:white;
+  font-size:30px;
+}
 
 .wrapper{
 
@@ -26,6 +29,11 @@ text-align: center;
 }
 
 
+.controls{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
 
 /* ====== buttons */
 .button {
@@ -33,13 +41,32 @@ text-align: center;
   background: 0;
   color:white;
 
-}
-.add-cyclist{
-
   font-family: 'Montserrat', sans-serif;
   // font-family: 'Lobster', cursive;
   font-size: 30px;
   font-weight: 200;
+  border: 1px solid white;
+  padding:5px 10px;
+  margin:0 10px;
+  border-radius: 3px;
+  color: #fff;
+  text-shadow: 0 0 80px #ffffff,0 0 30px #008000,0 0 6px #0000ff;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(#ffffff, 0.3),0 0 3px rgba(#008000, 0.3),0 0 2px rgba(#0000ff, 0.3);
+  transition: text-shadow 300ms ease-in-out,  box-shadow 300ms, ease-in;
+  &:hover{
+    text-shadow: 0 0 80px red,0 0 30px firebrick,0 0 6px darkred;
+    box-shadow: 0 0 10px rgba(red, 0.3),0 0 3px rgba(firebrick, 0.3),0 0 2px rgba(darkred, 0.3);
+  }
+}
+.add-cyclist{
+
+
+}
+
+.start-race{
+
+
 }
 
 
@@ -73,12 +100,18 @@ text-align: center;
 }
 
 
+.road{
+  border-bottom: 3px dashed rgba(255,255,255,0.3);
+  
+}
+
+
 /* ===================== Header */
 
 .header {
   width: 100%;
   text-align: center;
-  padding: 40px;
+  padding: 40px 40px 0 40px;
   font-size: 75px;
   font-family: 'Monoton', cursive;
   text-align: center;
