@@ -42,18 +42,28 @@ export default {
         this.position += (power / this.resistance);
       }
     },
-    start() {
-      navigator.bluetooth.requestDevice({ filters: [{ services: ['cycling_power'] }] })
-        .then((device) => device.gatt.connect())
-        .then((server) => server.getPrimaryService('cycling_power'))
-        .then((service) => service.getCharacteristic('cycling_power_measurement'))
-        .then((characteristic) => characteristic.startNotifications())
-        .then((characteristic) => {
-          characteristic.addEventListener('characteristicvaluechanged', this.handleCharacteristicValueChanged.bind(this));
-        })
-        .catch((error) => console.log(error));
+    async start() {
+      try {
+        const device = await navigator.bluetooth.requestDevice({ filters: [{ services: ['cycling_power'] }] });
+        const server = await device.gatt.connect();
+        const cyclingPower = await server.getPrimaryService('cycling_power');
+        const cyclingPowerResistance = await cyclingPower.getCharacteristic('a026e005-0a7d-4ab3-97fa-f1500f9feb8b');
+        await cyclingPowerResistance.startNotifications();
+        const resistance = await cyclingPowerResistance.getDescriptor('00002902-0000-1000-8000-00805f9b34fb');
+        console.log(resistance);
+        const data = new Uint8Array([32, 0xee, 0xfc]);
+        const response = await resistance.writeValue(data);
+        console.log(response);
+        // const cyclingPowerMeasurement =
+        // await cyclingPower.getCharacteristic('cycling_power_measurement');
+        // await cyclingPowerMeasurement.startNotifications();
+        // await cyclingPowerMeasurement.addEventListener('characteristicvaluechanged',
+        // this.handleCyclingPowerMeasurementValueChanged.bind(this));
+      } catch (error) {
+        console.log(error);
+      }
     },
-    handleCharacteristicValueChanged(event) {
+    handleCyclingPowerMeasurementValueChanged(event) {
       const { value } = event.target;
       const index = 1;
       const power = value.getInt16(index);
