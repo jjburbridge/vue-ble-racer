@@ -93,17 +93,13 @@ export default {
         const server = await device.gatt.connect();
         const cyclingPower = await server.getPrimaryService('cycling_power');
         const cyclingPowerResistance = await cyclingPower.getCharacteristic('a026e005-0a7d-4ab3-97fa-f1500f9feb8b');
-        await cyclingPowerResistance.startNotifications();
-        const resistance = await cyclingPowerResistance.getDescriptor('00002902-0000-1000-8000-00805f9b34fb');
-        console.log(resistance);
-        const data = new Uint8Array([32, 0xee, 0xfc]);
-        const response = await resistance.writeValue(data);
+
+        const data = new Uint8Array.of(1);
+        const response = await cyclingPowerResistance.writeValue(data);
         console.log(response);
-        // const cyclingPowerMeasurement =
-        // await cyclingPower.getCharacteristic('cycling_power_measurement');
-        // await cyclingPowerMeasurement.startNotifications();
-        // await cyclingPowerMeasurement.addEventListener('characteristicvaluechanged',
-        // this.handleCyclingPowerMeasurementValueChanged.bind(this));
+        const cyclingPowerMeasurement = await cyclingPower.getCharacteristic('cycling_power_measurement');
+        await cyclingPowerMeasurement.startNotifications();
+        await cyclingPowerMeasurement.addEventListener('characteristicvaluechanged', this.handleCyclingPowerMeasurementValueChanged.bind(this));
       } catch (error) {
         console.log(error);
       }
